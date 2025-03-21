@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>标讯通 - 订阅详情</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #F2F2F7;
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <div class="bg-white sticky top-0 z-40 border-b border-gray-200">
+        <div class="flex items-center h-11 px-4">
+            <a href="subscription.html" class="text-gray-600">
+                <i class="fas fa-chevron-left"></i>
+            </a>
+            <h1 class="ml-4 text-lg font-semibold">智慧城市项目订阅</h1>
+        </div>
+    </div>
+
+    <!-- 订阅信息卡片 -->
+    <div class="bg-white p-4 mb-2">
+        <div class="flex justify-between items-center mb-3">
+            <div class="flex items-center">
+                <i class="fas fa-clock text-blue-500 mr-2"></i>
+                <span class="text-sm text-gray-600">创建于 2024-01-15</span>
+            </div>
+            <div class="flex items-center">
+                <i class="fas fa-sync text-green-500 mr-2"></i>
+                <span class="text-sm text-gray-600">每日更新</span>
+            </div>
+        </div>
+        <div class="space-y-2">
+            <div class="flex items-center text-sm text-gray-600">
+                <i class="fas fa-filter w-5 text-gray-400"></i>
+                <span>关键词：智慧城市、智能交通、数字化</span>
+            </div>
+            <div class="flex items-center text-sm text-gray-600">
+                <i class="fas fa-map-marker-alt w-5 text-gray-400"></i>
+                <span>地区：北京市</span>
+            </div>
+            <div class="flex items-center text-sm text-gray-600">
+                <i class="fas fa-chart-line w-5 text-gray-400"></i>
+                <span>累计推送：127条</span>
+            </div>
+            <div class="flex items-center text-sm text-gray-600">
+                <i class="fas fa-bell w-5 text-gray-400"></i>
+                <span>最近更新：2024-03-15 08:00</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 今日更新统计 -->
+    <div class="bg-white p-4 mb-2">
+        <div class="flex justify-between items-center">
+            <span class="text-base font-medium">今日更新</span>
+            <span class="text-blue-500 text-lg font-medium">5</span>
+        </div>
+    </div>
+
+    <!-- 标讯列表 -->
+    <div class="divide-y divide-gray-100 bg-white">
+        <a href="detail.html" class="block p-4 hover:bg-gray-50">
+            <div class="flex items-center justify-between">
+                <span class="bg-green-100 text-green-600 text-xs px-2 py-0.5 rounded">新发布</span>
+                <span class="text-xs text-gray-500">10分钟前</span>
+            </div>
+            <h4 class="font-medium mt-2">北京市智慧交通系统建设项目招标公告</h4>
+            <p class="text-sm text-gray-600 mt-1">项目预算：1.5亿元，包含智能交通管理系统、智慧停车系统等多个子系统建设。</p>
+        </a>
+        <!-- 更多标讯项... -->
+    </div>
+</body>
+</html>

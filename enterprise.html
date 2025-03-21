@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>标讯通 - 企业服务</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #F2F2F7;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .ios-status-bar {
+            background-color: #FFFFFF;
+            height: 44px;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+        .chart-container {
+            height: 200px;
+            position: relative;
+        }
+        .tag-item {
+            transition: all 0.2s;
+        }
+        .tag-item:active {
+            transform: scale(0.98);
+        }
+    </style>
+</head>
+<body class="pb-20">
+    <!-- iOS 状态栏 -->
+    <div class="ios-status-bar flex items-center justify-between px-4">
+        <div class="text-sm font-medium">9:41</div>
+        <div class="flex items-center space-x-1">
+            <i class="fas fa-signal"></i>
+            <i class="fas fa-wifi"></i>
+            <i class="fas fa-battery-full"></i>
+        </div>
+    </div>
+
+    <!-- 顶部导航栏 -->
+    <div class="bg-white sticky top-11 z-40 border-b border-gray-200">
+        <div class="flex items-center h-11 px-4">
+            <a href="profile.html" class="text-gray-600">
+                <i class="fas fa-chevron-left"></i>
+            </a>
+            <h1 class="ml-4 text-lg font-semibold">企业服务</h1>
+        </div>
+    </div>
+
+    <!-- 企业概览 -->
+    <div class="bg-white p-4">
+        <div class="flex items-center justify-between">
+            <div>
+                <h2 class="text-lg font-semibold">某科技有限公司</h2>
+                <p class="text-sm text-gray-500 mt-1">信息技术服务行业</p>
+            </div>
+            <div class="bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-sm">
+                已认证企业
+            </div>
+        </div>
+    </div>
+
+    <!-- 数据分析 -->
+    <div class="bg-white mt-2 p-4">
+        <h2 class="text-lg font-semibold mb-4">投标数据分析</h2>
+        <div class="grid grid-cols-3 gap-4 mb-4">
+            <div class="text-center">
+                <div class="text-2xl font-semibold text-blue-600">86%</div>
+                <div class="text-xs text-gray-500 mt-1">投标成功率</div>
+            </div>
+            <div class="text-center">
+                <div class="text-2xl font-semibold text-blue-600">32</div>
+                <div class="text-xs text-gray-500 mt-1">本月投标数</div>
+            </div>
+            <div class="text-center">
+                <div class="text-2xl font-semibold text-blue-600">12</div>
+                <div class="text-xs text-gray-500 mt-1">中标项目</div>
+            </div>
+        </div>
+        <div class="chart-container bg-gray-50 rounded-lg p-4">
+            <div class="text-sm font-medium mb-2">投标金额趋势</div>
+            <!-- 这里可以集成实际的图表库，如 Chart.js -->
+            <div class="h-32 flex items-end space-x-2">
+                <div class="flex-1 bg-blue-200 rounded-t" style="height: 60%"></div>
+                <div class="flex-1 bg-blue-300 rounded-t" style="height: 80%"></div>
+                <div class="flex-1 bg-blue-400 rounded-t" style="height: 40%"></div>
+                <div class="flex-1 bg-blue-500 rounded-t" style="height: 90%"></div>
+                <div class="flex-1 bg-blue-600 rounded-t" style="height: 70%"></div>
+            </div>
+            <div class="flex justify-between text-xs text-gray-500 mt-2">
+                <span>1月</span>
+                <span>2月</span>
+                <span>3月</span>
+                <span>4月</span>
+                <span>5月</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 行业标签管理 -->
+    <div class="bg-white mt-2 p-4">
+        <div class="flex justify-between items-center mb-4">
+            <h2 class="text-lg font-semibold">行业标签管理</h2>
+            <button class="text-blue-500 text-sm">
+                编辑标签
+            </button>
+        </div>
+        <div class="flex flex-wrap gap-2">
+            <div class="tag-item px-3 py-1.5 bg-blue-100 text-blue-600 rounded-full text-sm">
+                智慧城市
+                <i class="fas fa-check-circle ml-1"></i>
+            </div>
+            <div class="tag-item px-3 py-1.5 bg-blue-100 text-blue-600 rounded-full text-sm">
+                系统集成
+                <i class="fas fa-check-circle ml-1"></i>
+            </div>
+            <div class="tag-item px-3 py-1.5 bg-gray-100 text-gray-600 rounded-full text-sm">
+                物联网
+            </div>
+            <div class="tag-item px-3 py-1.5 bg-gray-100 text-gray-600 rounded-full text-sm">
+                大数据
+            </div>
+            <div class="tag-item px-3 py-1.5 bg-gray-100 text-gray-600 rounded-full text-sm">
+                人工智能
+            </div>
+        </div>
+    </div>
+
+    <!-- 竞争对手分析 -->
+    <div class="bg-white mt-2 p-4">
+        <h2 class="text-lg font-semibold mb-4">竞争对手分析</h2>
+        <div class="space-y-3">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                    <div class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center">
+                        <span class="text-sm text-gray-600">A</span>
+                    </div>
+                    <div class="ml-3">
+                        <div class="text-sm font-medium">竞争对手A</div>
+                        <div class="text-xs text-gray-500">智慧城市解决方案提供商</div>
+                    </div>
+                </div>
+                <div class="text-sm text-gray-600">
+                    中标率 75%
+                </div>
+            </div>
+            <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                    <div class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center">
+                        <span class="text-sm text-gray-600">B</span>
+                    </div>
+                    <div class="ml-3">
+                        <div class="text-sm font-medium">竞争对手B</div>
+                        <div class="text-xs text-gray-500">系统集成服务商</div>
+                    </div>
+                </div>
+                <div class="text-sm text-gray-600">
+                    中标率 68%
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 数据服务 -->
+    <div class="bg-white mt-2 p-4">
+        <h2 class="text-lg font-semibold mb-4">增值服务</h2>
+        <div class="grid grid-cols-2 gap-4">
+            <div class="bg-gray-50 rounded-lg p-4">
+                <i class="fas fa-chart-pie text-blue-500 text-xl"></i>
+                <div class="text-sm font-medium mt-2">深度数据分析</div>
+                <div class="text-xs text-gray-500 mt-1">投标数据深度挖掘</div>
+            </div>
+            <div class="bg-gray-50 rounded-lg p-4">
+                <i class="fas fa-robot text-purple-500 text-xl"></i>
+                <div class="text-sm font-medium mt-2">智能投标助手</div>
+                <div class="text-xs text-gray-500 mt-1">AI辅助投标决策</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

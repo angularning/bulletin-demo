@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>标讯通 - 搜索</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #F2F2F7;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .ios-status-bar {
+            background-color: #FFFFFF;
+            height: 44px;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+        .filter-chip {
+            border: 1px solid #E5E5EA;
+            border-radius: 16px;
+            padding: 4px 12px;
+            font-size: 13px;
+            color: #8E8E93;
+            background: white;
+        }
+        .filter-chip.active {
+            background: #007AFF;
+            color: white;
+            border-color: #007AFF;
+        }
+        .card {
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+    </style>
+</head>
+<body class="pb-20">
+    <!-- iOS 状态栏 -->
+    <div class="ios-status-bar flex items-center justify-between px-4">
+        <div class="text-sm font-medium">9:41</div>
+        <div class="flex items-center space-x-1">
+            <i class="fas fa-signal"></i>
+            <i class="fas fa-wifi"></i>
+            <i class="fas fa-battery-full"></i>
+        </div>
+    </div>
+
+    <!-- 搜索栏 -->
+    <div class="px-4 py-2 bg-white sticky top-11 z-40 shadow-sm">
+        <div class="flex items-center bg-gray-100 rounded-full px-4 py-2">
+            <i class="fas fa-search text-gray-400 mr-2"></i>
+            <input type="text" placeholder="搜索招标项目、关键词、地区..." class="bg-transparent w-full outline-none text-sm">
+        </div>
+       
+    </div>
+    <div class="px-4 py-2 bg-white">
+         <!-- 热门搜索 -->
+         <div class="py-3">
+            <div class="flex items-center justify-between mb-3">
+                <div class="text-sm text-gray-500">热门搜索</div>
+                <button class="text-xs text-gray-400">
+                    <i class="fas fa-sync-alt mr-1"></i>
+                    换一批
+                </button>
+            </div>
+            <div class="grid grid-cols-2 gap-3">
+                <a href="#" class="flex items-center">
+                    <span class="text-lg font-medium text-blue-500 mr-3">1</span>
+                    <div class="flex-1">
+                        <div class="flex items-center">
+                            <span class="text-sm">智慧城市建设</span>
+                            <span class="ml-1 px-1 text-xs text-red-500 border border-red-500 rounded">热</span>
+                        </div>
+                        <div class="text-xs text-gray-400">12.5万搜索</div>
+                    </div>
+                </a>
+                <a href="#" class="flex items-center">
+                    <span class="text-lg font-medium text-blue-500 mr-3">2</span>
+                    <div class="flex-1">
+                        <div class="flex items-center">
+                            <span class="text-sm">医疗设备采购</span>
+                            <span class="ml-1 px-1 text-xs text-orange-500 border border-orange-500 rounded">新</span>
+                        </div>
+                        <div class="text-xs text-gray-400">8.3万搜索</div>
+                    </div>
+                </a>
+                <a href="#" class="flex items-center">
+                    <span class="text-lg font-medium text-gray-400 mr-3">3</span>
+                    <div class="flex-1">
+                        <div class="text-sm">道路工程项目</div>
+                        <div class="text-xs text-gray-400">6.2万搜索</div>
+                    </div>
+                </a>
+                <a href="#" class="flex items-center">
+                    <span class="text-lg font-medium text-gray-400 mr-3">4</span>
+                    <div class="flex-1">
+                        <div class="text-sm">环保设施改造</div>
+                        <div class="text-xs text-gray-400">5.8万搜索</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 筛选器 -->
+    <div class="bg-white sticky top-[88px] z-30 border-t border-gray-100">
+        <!-- 二级筛选 -->
+        <div class="px-4 py-2 flex justify-between text-sm">
+            <button onclick="showFilterModal('area')" class="flex items-center text-gray-600">
+                地区筛选
+                <i class="fas fa-chevron-down ml-1 text-xs"></i>
+            </button>
+            <button onclick="showFilterModal('budget')" class="flex items-center text-gray-600">
+                预算金额
+                <i class="fas fa-chevron-down ml-1 text-xs"></i>
+            </button>
+            <button onclick="showFilterModal('time')" class="flex items-center text-gray-600">
+                发布时间
+                <i class="fas fa-chevron-down ml-1 text-xs"></i>
+            </button>
+            <button onclick="showFilterModal('more')" class="flex items-center text-gray-600">
+                更多筛选
+                <i class="fas fa-chevron-down ml-1 text-xs"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- 筛选弹框 -->
+    <div id="filterModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden">
+        <div class="absolute bottom-0 left-0 right-0 bg-white rounded-t-xl">
+            <div class="p-4">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-lg font-medium" id="filterTitle">筛选条件</h3>
+                    <button onclick="hideFilterModal()" class="text-gray-400">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div id="filterContent" class="max-h-[60vh] overflow-y-auto">
+                    <!-- 动态内容区域 -->
+                </div>
+                <div class="flex space-x-3 mt-4">
+                    <button onclick="resetFilter()" class="flex-1 py-2 border border-gray-200 rounded-lg text-gray-600">重置</button>
+                    <button onclick="applyFilter()" class="flex-1 py-2 bg-blue-500 text-white rounded-lg">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 底部导航栏 -->
+    <div class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200">
+        <div class="flex items-center justify-around h-16">
+            <a href="home.html" class="flex flex-col items-center">
+                <i class="fas fa-home text-gray-400"></i>
+                <span class="text-xs mt-1 text-gray-400">首页</span>
+            </a>
+            <a href="search.html" class="flex flex-col items-center">
+                <i class="fas fa-search text-blue-500"></i>
+                <span class="text-xs mt-1 text-blue-500">搜索</span>
+            </a>
+            <a href="subscription.html" class="flex flex-col items-center">
+                <i class="far fa-star text-gray-400"></i>
+                <span class="text-xs mt-1 text-gray-400">订阅</span>
+            </a>
+            <a href="profile.html" class="flex flex-col items-center">
+                <i class="far fa-user text-gray-400"></i>
+                <span class="text-xs mt-1 text-gray-400">我的</span>
+            </a>
+        </div>
+        <div class="h-[env(safe-area-inset-bottom)]"></div>
+    </div>
+
+    <script>
+        function updateFilter(type, value) {
+            // 更新筛选状态
+            const buttons = document.querySelectorAll('.filter-chip');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+
+        function showFilterModal(type) {
+            const modal = document.getElementById('filterModal');
+            const title = document.getElementById('filterTitle');
+            const content = document.getElementById('filterContent');
+            
+            // 根据类型设置不同的筛选内容
+            switch(type) {
+                case 'area':
+                    title.textContent = '地区筛选';
+                    content.innerHTML = `
+                        <div class="grid grid-cols-3 gap-3">
+                            <button class="p-2 border rounded-lg text-center">北京市</button>
+                            <button class="p-2 border rounded-lg text-center">上海市</button>
+                            <button class="p-2 border rounded-lg text-center">广东省</button>
+                            <button class="p-2 border rounded-lg text-center">江苏省</button>
+                            <button class="p-2 border rounded-lg text-center">浙江省</button>
+                            <button class="p-2 border rounded-lg text-center">更多地区</button>
+                        </div>
+                    `;
+                    break;
+                case 'budget':
+                    title.textContent = '预算金额';
+                    content.innerHTML = `
+                        <div class="space-y-3">
+                            <button class="w-full p-2 border rounded-lg text-left">100万以下</button>
+                            <button class="w-full p-2 border rounded-lg text-left">100-500万</button>
+                            <button class="w-full p-2 border rounded-lg text-left">500-1000万</button>
+                            <button class="w-full p-2 border rounded-lg text-left">1000万-5000万</button>
+                            <button class="w-full p-2 border rounded-lg text-left">5000万以上</button>
+                        </div>
+                    `;
+                    break;
+                // ... 其他筛选类型
+            }
+            
+            modal.classList.remove('hidden');
+        }
+
+        function hideFilterModal() {
+            document.getElementById('filterModal').classList.add('hidden');
+        }
+
+        function resetFilter() {
+            // 重置筛选条件
+        }
+
+        function applyFilter() {
+            // 应用筛选条件
+            hideFilterModal();
+        }
+    </script>
+
+    <!-- 搜索结果列表 -->
+    <div class="px-4 py-4 space-y-3">
+        <!-- 搜索结果统计 -->
+        <div class="text-sm text-gray-500 mb-2">
+            共找到 <span class="text-blue-500 font-medium">2,356</span> 个相关项目
+        </div>
+
+        <!-- 搜索结果卡片 -->
+        <div class="card bg-white p-4">
+            <div class="flex justify-between items-start">
+                <div class="flex-1">
+                    <div class="flex items-center">
+                        <span class="bg-blue-100 text-blue-600 text-xs px-2 py-0.5 rounded">政府采购</span>
+                        <span class="ml-2 text-xs text-gray-500">发布时间: 2024-05-28</span>
+                    </div>
+                    <h3 class="font-semibold mt-2">某市智慧交通系统建设项目招标公告</h3>
+                    <div class="mt-1 text-sm text-gray-600 line-clamp-2">
+                        本项目为智慧交通系统建设，包含交通信号控制系统、电子警察系统等多个子系统的建设。
+                    </div>
+                    <div class="flex items-center mt-2 text-xs text-gray-500">
+                        <span class="mr-3"><i class="fas fa-map-marker-alt mr-1"></i>北京市</span>
+                        <span class="mr-3"><i class="fas fa-clock mr-1"></i>截止: 2024-06-28</span>
+                        <span><i class="fas fa-yen-sign mr-1"></i>1.2亿元</span>
+                    </div>
+                </div>
+                <div class="ml-3">
+                    <i class="far fa-bookmark text-gray-400"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="card bg-white p-4">
+            <div class="flex justify-between items-start">
+                <div class="flex-1">
+                    <div class="flex items-center">
+                        <span class="bg-green-100 text-green-600 text-xs px-2 py-0.5 rounded">企业采购</span>
+                        <span class="ml-2 text-xs text-gray-500">发布时间: 2024-05-27</span>
+                    </div>
+                    <h3 class="font-semibold mt-2">医疗设备采购及安装项目招标公告</h3>
+                    <div class="mt-1 text-sm text-gray-600 line-clamp-2">
+                        某三甲医院采购医疗设备项目，包含CT机、核磁共振等大型医疗设备的采购及安装。
+                    </div>
+                    <div class="flex items-center mt-2 text-xs text-gray-500">
+                        <span class="mr-3"><i class="fas fa-map-marker-alt mr-1"></i>上海市</span>
+                        <span class="mr-3"><i class="fas fa-clock mr-1"></i>截止: 2024-06-27</span>
+                        <span><i class="fas fa-yen-sign mr-1"></i>3000万元</span>
+                    </div>
+                </div>
+                <div class="ml-3">
+                    <i class="far fa-bookmark text-gray-400"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="card bg-white p-4">
+            <div class="flex justify-between items-start">
+                <div class="flex-1">
+                    <div class="flex items-center">
+                        <span class="bg-yellow-100 text-yellow-600 text-xs px-2 py-0.5 rounded">工程建设</span>
+                        <span class="ml-2 text-xs text-gray-500">发布时间: 2024-05-26</span>
+                    </div>
+                    <h3 class="font-semibold mt-2">市政道路改造工程项目招标公告</h3>
+                    <div class="mt-1 text-sm text-gray-600 line-clamp-2">
+                        某区域市政道路改造工程，包含道路拓宽、地下管网改造、绿化景观等工程内容。
+                    </div>
+                    <div class="flex items-center mt-2 text-xs text-gray-500">
+                        <span class="mr-3"><i class="fas fa-map-marker-alt mr-1"></i>广州市</span>
+                        <span class="mr-3"><i class="fas fa-clock mr-1"></i>截止: 2024-06-26</span>
+                        <span><i class="fas fa-yen-sign mr-1"></i>8000万元</span>
+                    </div>
+                </div>
+                <div class="ml-3">
+                    <i class="far fa-bookmark text-gray-400"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="card bg-white p-4">
+            <div class="flex justify-between items-start">
+                <div class="flex-1">
+                    <div class="flex items-center">
+                        <span class="bg-yellow-100 text-yellow-600 text-xs px-2 py-0.5 rounded">工程建设</span>
+                        <span class="ml-2 text-xs text-gray-500">发布时间: 2024-05-26</span>
+                    </div>
+                    <h3 class="font-semibold mt-2">市政道路改造工程项目招标公告</h3>
+                    <div class="mt-1 text-sm text-gray-600 line-clamp-2">
+                        某区域市政道路改造工程，包含道路拓宽、地下管网改造、绿化景观等工程内容。
+                    </div>
+                    <div class="flex items-center mt-2 text-xs text-gray-500">
+                        <span class="mr-3"><i class="fas fa-map-marker-alt mr-1"></i>广州市</span>
+                        <span class="mr-3"><i class="fas fa-clock mr-1"></i>截止: 2024-06-26</span>
+                        <span><i class="fas fa-yen-sign mr-1"></i>8000万元</span>
+                    </div>
+                </div>
+                <div class="ml-3">
+                    <i class="far fa-bookmark text-gray-400"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="card bg-white p-4">
+            <div class="flex justify-between items-start">
+                <div class="flex-1">
+                    <div class="flex items-center">
+                        <span class="bg-yellow-100 text-yellow-600 text-xs px-2 py-0.5 rounded">工程建设</span>
+                        <span class="ml-2 text-xs text-gray-500">发布时间: 2024-05-26</span>
+                    </div>
+                    <h3 class="font-semibold mt-2">市政道路改造工程项目招标公告</h3>
+                    <div class="mt-1 text-sm text-gray-600 line-clamp-2">
+                        某区域市政道路改造工程，包含道路拓宽、地下管网改造、绿化景观等工程内容。
+                    </div>
+                    <div class="flex items-center mt-2 text-xs text-gray-500">
+                        <span class="mr-3"><i class="fas fa-map-marker-alt mr-1"></i>广州市</span>
+                        <span class="mr-3"><i class="fas fa-clock mr-1"></i>截止: 2024-06-26</span>
+                        <span><i class="fas fa-yen-sign mr-1"></i>8000万元</span>
+                    </div>
+                </div>
+                <div class="ml-3">
+                    <i class="far fa-bookmark text-gray-400"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="card bg-white p-4">
+            <div class="flex justify-between items-start">
+                <div class="flex-1">
+                    <div class="flex items-center">
+                        <span class="bg-yellow-100 text-yellow-600 text-xs px-2 py-0.5 rounded">工程建设</span>
+                        <span class="ml-2 text-xs text-gray-500">发布时间: 2024-05-26</span>
+                    </div>
+                    <h3 class="font-semibold mt-2">市政道路改造工程项目招标公告</h3>
+                    <div class="mt-1 text-sm text-gray-600 line-clamp-2">
+                        某区域市政道路改造工程，包含道路拓宽、地下管网改造、绿化景观等工程内容。
+                    </div>
+                    <div class="flex items-center mt-2 text-xs text-gray-500">
+                        <span class="mr-3"><i class="fas fa-map-marker-alt mr-1"></i>广州市</span>
+                        <span class="mr-3"><i class="fas fa-clock mr-1"></i>截止: 2024-06-26</span>
+                        <span><i class="fas fa-yen-sign mr-1"></i>8000万元</span>
+                    </div>
+                </div>
+                <div class="ml-3">
+                    <i class="far fa-bookmark text-gray-400"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="card bg-white p-4">
+            <div class="flex justify-between items-start">
+                <div class="flex-1">
+                    <div class="flex items-center">
+                        <span class="bg-yellow-100 text-yellow-600 text-xs px-2 py-0.5 rounded">工程建设</span>
+                        <span class="ml-2 text-xs text-gray-500">发布时间: 2024-05-26</span>
+                    </div>
+                    <h3 class="font-semibold mt-2">市政道路改造工程项目招标公告</h3>
+                    <div class="mt-1 text-sm text-gray-600 line-clamp-2">
+                        某区域市政道路改造工程，包含道路拓宽、地下管网改造、绿化景观等工程内容。
+                    </div>
+                    <div class="flex items-center mt-2 text-xs text-gray-500">
+                        <span class="mr-3"><i class="fas fa-map-marker-alt mr-1"></i>广州市</span>
+                        <span class="mr-3"><i class="fas fa-clock mr-1"></i>截止: 2024-06-26</span>
+                        <span><i class="fas fa-yen-sign mr-1"></i>8000万元</span>
+                    </div>
+                </div>
+                <div class="ml-3">
+                    <i class="far fa-bookmark text-gray-400"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

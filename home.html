@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>标讯通 - 首页</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #F2F2F7;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+        }
+        .ios-status-bar {
+            background-color: #FFFFFF;
+            height: 44px;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+        .safe-area-bottom {
+            padding-bottom: env(safe-area-inset-bottom, 20px);
+        }
+        .tab-bar {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid #E5E5EA;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 50;
+        }
+        .card {
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(43, 34, 34, 0.08);
+            transition: transform 0.2s;
+        }
+        .card:active {
+            transform: scale(0.98);
+        }
+        .marquee {
+            white-space: nowrap;
+            overflow: hidden;
+            box-sizing: border-box;
+        }
+        .marquee-content {
+            display: inline-block;
+            animation: marquee 20s linear infinite;
+        }
+        @keyframes marquee {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        .swiper-container {
+            overflow-x: scroll;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+        .swiper-container::-webkit-scrollbar {
+            display: none;
+        }
+        .swiper-slide {
+            scroll-snap-align: start;
+            flex-shrink: 0;
+        }
+        .badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: #FF3B30;
+            color: white;
+            border-radius: 10px;
+            padding: 2px 6px;
+            font-size: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body class="pb-20">
+    <!-- iOS 状态栏 -->
+    <div class="ios-status-bar flex items-center justify-between px-4">
+        <div class="text-sm font-medium">9:41</div>
+        <div class="flex items-center space-x-1">
+            <i class="fas fa-signal"></i>
+            <i class="fas fa-wifi"></i>
+            <i class="fas fa-battery-full"></i>
+        </div>
+    </div>
+
+    <!-- 顶部搜索栏 -->
+    <div class="px-4 py-2 bg-white sticky top-11 z-40 shadow-sm">
+        <div class="flex items-center bg-gray-100 rounded-full px-4 py-2">
+            <i class="fas fa-search text-gray-400 mr-2"></i>
+            <input type="text" placeholder="搜索招标项目、关键词、地区..." class="bg-transparent w-full outline-none text-sm">
+        </div>
+    </div>
+
+    <!-- 轮播广告 -->
+    <div class="px-4 py-3">
+        <div class="swiper-container flex overflow-x-auto">
+            <div class="swiper-slide w-full flex-shrink-0">
+                <div class="relative rounded-xl overflow-hidden">
+                    <img src="https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" class="w-full h-40 object-cover" alt="商务合作">
+                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4">
+                        <div class="text-white font-bold">2024年政府采购项目专题</div>
+                        <div class="text-white text-xs opacity-80">抢先获取最新政府招标信息</div>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-slide w-full flex-shrink-0 ml-3">
+                <div class="relative rounded-xl overflow-hidden">
+                    <img src="https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" class="w-full h-40 object-cover" alt="企业服务">
+                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4">
+                        <div class="text-white font-bold">企业数据服务</div>
+                        <div class="text-white text-xs opacity-80">定制化行业数据分析与标签</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 消息滚动条 -->
+    <div class="bg-blue-50 mx-4 rounded-lg p-2 flex items-center">
+        <div class="bg-blue-500 text-white text-xs px-2 py-1 rounded mr-2">公告</div>
+        <div class="marquee flex-1 overflow-hidden">
+            <div class="marquee-content text-sm text-gray-700">
+                最新：北京市政府采购中心发布2024年度第一批采购项目 | 上海市浦东新区智慧城市建设项目招标启动 | 广东省交通基础设施建设招标公告
+            </div>
+        </div>
+    </div>
+
+    <!-- 精品标识区块 -->
+    <div class="px-4 mt-4">
+        <div class="flex justify-between items-center mb-2">
+            <h2 class="text-lg font-bold">今日精选</h2>
+            <a href="#" class="text-blue-500 text-sm">查看全部</a>
+        </div>
+        
+        <!-- 精选项目卡片 -->
+        <div class="space-y-3">
+            <a href="detail.html" class="card bg-white p-4 block">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <div class="flex items-center">
+                            <span class="bg-red-100 text-red-600 text-xs px-2 py-0.5 rounded">重点项目</span>
+                            <span class="ml-2 text-xs text-gray-500">截止日期: 2024-06-15</span>
+                        </div>
+                        <h3 class="font-semibold mt-2">智慧城市基础设施建设项目招标公告</h3>
+                        <div class="mt-1 text-sm text-gray-600 line-clamp-2">本项目为某市智慧城市基础设施建设项目，包含智能交通、安防监控、数据中心等多个子项目，预算金额约2.5亿元。</div>
+                        <div class="flex items-center mt-2 text-xs text-gray-500">
+                            <span class="mr-3"><i class="fas fa-map-marker-alt mr-1"></i>北京市</span>
+                            <span class="mr-3"><i class="fas fa-tag mr-1"></i>信息技术</span>
+                            <span><i class="fas fa-yen-sign mr-1"></i>2.5亿元</span>
+                        </div>
+                    </div>
+                    <div class="ml-2">
+                        <i class="far fa-bookmark text-gray-400"></i>
+                    </div>
+                </div>
+            </a>
+            
+            
+            <!-- 精选项目卡片2 -->
+            <a href="detail.html" class="card bg-white p-4 block">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <div class="flex items-center">
+                            <span class="bg-green-100 text-green-600 text-xs px-2 py-0.5 rounded">新发布</span>
+                            <span class="ml-2 text-xs text-gray-500">截止日期: 2024-06-10</span>
+                        </div>
+                        <h3 class="font-semibold mt-2">医疗设备采购项目招标公告</h3>
+                        <div class="mt-1 text-sm text-gray-600 line-clamp-2">某三甲医院医疗设备采购项目，包含CT、核磁共振等大型医疗设备，预算金额约3000万元。</div>
+                        <div class="flex items-center mt-2 text-xs text-gray-500">
+                            <span class="mr-3"><i class="fas fa-map-marker-alt mr-1"></i>上海市</span>
+                            <span class="mr-3"><i class="fas fa-tag mr-1"></i>医疗器械</span>
+                            <span><i class="fas fa-yen-sign mr-1"></i>3000万元</span>
+                        </div>
+                    </div>
+                    <div class="ml-2">
+                        <i class="far fa-bookmark text-gray-400"></i>
+                    </div>
+                </div>
+            </a>
+            
+            <!-- 精选项目卡片3 -->
+            <a href="detail.html" class="card bg-white p-4 block">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <div class="flex items-center">
+                            <span class="bg-blue-100 text-blue-600 text-xs px-2 py-0.5 rounded">政府采购</span>
+                            <span class="ml-2 text-xs text-gray-500">截止日期: 2024-06-20</span>
+                        </div>
+                        <h3 class="font-semibold mt-2">城市道路改造工程招标公告</h3>
+                        <div class="mt-1 text-sm text-gray-600 line-clamp-2">某市主城区道路改造工程，包含道路拓宽、地下管网改造、智能交通系统安装等内容，预算金额约1.8亿元。</div>
+                        <div class="flex items-center mt-2 text-xs text-gray-500">
+                            <span class="mr-3"><i class="fas fa-map-marker-alt mr-1"></i>广州市</span>
+                            <span class="mr-3"><i class="fas fa-tag mr-1"></i>基础设施</span>
+                            <span><i class="fas fa-yen-sign mr-1"></i>1.8亿元</span>
+                        </div>
+                    </div>
+                    <div class="ml-2">
+                        <i class="far fa-bookmark text-gray-400"></i>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <!-- 行业分类 -->
+    <div class="px-4 mt-6">
+        <h2 class="text-lg font-bold mb-3">热门行业</h2>
+        <div class="grid grid-cols-4 gap-3">
+            <div class="bg-white rounded-lg p-3 text-center shadow-sm">
+                <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mx-auto">
+                    <i class="fas fa-building text-blue-500"></i>
+                </div>
+                <div class="text-xs mt-2">基建工程</div>
+            </div>
+            <div class="bg-white rounded-lg p-3 text-center shadow-sm">
+                <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center mx-auto">
+                    <i class="fas fa-hospital text-green-500"></i>
+                </div>
+                <div class="text-xs mt-2">医疗卫生</div>
+            </div>
+            <div class="bg-white rounded-lg p-3 text-center shadow-sm">
+                <div class="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center mx-auto">
+                    <i class="fas fa-microchip text-purple-500"></i>
+                </div>
+                <div class="text-xs mt-2">信息技术</div>
+            </div>
+            <div class="bg-white rounded-lg p-3 text-center shadow-sm">
+                <div class="w-10 h-10 bg-yellow-100 rounded-full flex items-center justify-center mx-auto">
+                    <i class="fas fa-leaf text-yellow-500"></i>
+                </div>
+                <div class="text-xs mt-2">环保能源</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 底部链接 -->
+    <div class="mt-8 mb-20 text-center">
+        <div class="text-sm text-gray-500 space-x-4">
+            <a href="about.html" class="hover:text-gray-700">关于我们</a>
+            <span class="text-gray-300">|</span>
+            <a href="business.html" class="hover:text-gray-700">商务合作</a>
+        </div>
+        <div class="mt-2 text-xs text-gray-400">© 2024 标讯通. All rights reserved.</div>
+    </div>
+
+    <!-- 底部导航栏 -->
+    <div class="tab-bar safe-area-bottom h-16 flex items-center justify-around">
+        <a href="home.html" class="flex flex-col items-center w-1/5">
+            <i class="fas fa-home text-blue-500"></i>
+            <span class="text-xs mt-1 text-blue-500">首页</span>
+        </a>
+        <a href="search.html" class="flex flex-col items-center w-1/5">
+            <i class="fas fa-search text-gray-400"></i>
+            <span class="text-xs mt-1 text-gray-400">搜索</span>
+        </a>
+        <a href="subscription.html" class="flex flex-col items-center w-1/5">
+            <i class="fas fa-star text-gray-400"></i>
+            <span class="text-xs mt-1 text-gray-400">订阅</span>
+        </a>
+        <a href="message.html" class="flex flex-col items-center w-1/5">
+            <i class="far fa-bell text-gray-400"></i>
+            <span class="text-xs mt-1 text-gray-400">消息</span>
+        </a>
+        <a href="profile.html" class="flex flex-col items-center w-1/5">
+            <i class="far fa-user text-gray-400"></i>
+            <span class="text-xs mt-1 text-gray-400">我的</span>
+        </a>
+    </div>
+</body>
+</html>

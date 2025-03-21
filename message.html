@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>标讯通 - 消息中心</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #F2F2F7;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .ios-status-bar {
+            background-color: #FFFFFF;
+            height: 44px;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+        .tab-bar {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid #E5E5EA;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 50;
+        }
+        .message-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #FF3B30;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body class="pb-20">
+    <!-- iOS 状态栏 -->
+    <div class="ios-status-bar flex items-center justify-between px-4">
+        <div class="text-sm font-medium">9:41</div>
+        <div class="flex items-center space-x-1">
+            <i class="fas fa-signal"></i>
+            <i class="fas fa-wifi"></i>
+            <i class="fas fa-battery-full"></i>
+        </div>
+    </div>
+
+    <!-- 顶部导航栏 -->
+    <div class="bg-white sticky top-11 z-40 border-b border-gray-200">
+        <div class="flex items-center justify-between h-11 px-4">
+            <h1 class="text-lg font-semibold">消息中心</h1>
+            <button class="text-gray-600">
+                <i class="fas fa-check-double"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- 消息分类 -->
+    <div class="bg-white px-4 py-3 flex space-x-3">
+        <button class="px-4 py-1.5 bg-blue-500 text-white rounded-full text-sm whitespace-nowrap">全部</button>
+        <button class="px-4 py-1.5 bg-gray-100 text-gray-600 rounded-full text-sm whitespace-nowrap">系统通知</button>
+        <button class="px-4 py-1.5 bg-gray-100 text-gray-600 rounded-full text-sm whitespace-nowrap">订阅动态</button>
+        <button class="px-4 py-1.5 bg-gray-100 text-gray-600 rounded-full text-sm whitespace-nowrap">标讯提醒</button>
+    </div>
+
+    <!-- 消息列表 -->
+    <div class="mt-2">
+        <!-- 今天 -->
+        <!-- <div class="px-4 py-2 text-xs text-gray-500">今天</div> -->
+        <div class="bg-white divide-y divide-gray-100">
+            <div class="px-4 py-3 flex items-start">
+                <div class="flex-shrink-0 w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
+                    <i class="fas fa-bell text-blue-500"></i>
+                </div>
+                <div class="ml-3 flex-1">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-base font-medium">系统通知</h3>
+                        <span class="text-xs text-gray-500">10:30</span>
+                    </div>
+                    <p class="text-sm text-gray-600 mt-1">您关注的"智慧城市基础设施建设项目"已更新招标文件，请及时查看。</p>
+                </div>
+                <div class="message-dot ml-2 mt-2"></div>
+            </div>
+
+            <div class="px-4 py-3 flex items-start">
+                <div class="flex-shrink-0 w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
+                    <i class="fas fa-file-alt text-green-500"></i>
+                </div>
+                <div class="ml-3 flex-1">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-base font-medium">订阅动态</h3>
+                        <span class="text-xs text-gray-500">09:15</span>
+                    </div>
+                    <p class="text-sm text-gray-600 mt-1">您的订阅已经更新，点击查看详情。</p>
+                </div>
+                <div class="message-dot ml-2 mt-2"></div>
+            </div>
+            <div class="px-4 py-3 flex items-start">
+                <div class="flex-shrink-0 w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center">
+                    <i class="fas fa-bullhorn text-orange-500"></i>
+                </div>
+                <div class="ml-3 flex-1">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-base font-medium">标讯提醒</h3>
+                        <span class="text-xs text-gray-500">昨天 14:30</span>
+                    </div>
+                    <p class="text-sm text-gray-600 mt-1">今日已更新9822条标讯，请及时查看。</p>
+                </div>
+                <div class="message-dot ml-2 mt-2"></div>
+
+            </div>
+        </div>
+
+        
+        <!-- <div class="px-4 py-2 text-xs text-gray-500 mt-2">昨天</div> -->
+        <div class="bg-white divide-y divide-gray-100">
+            <div class="px-4 py-3 flex items-start">
+                <div class="flex-shrink-0 w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
+                    <i class="fas fa-chart-line text-purple-500"></i>
+                </div>
+                <div class="ml-3 flex-1">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-base font-medium">数据分析</h3>
+                        <span class="text-xs text-gray-500">昨天 15:20</span>
+                    </div>
+                    <p class="text-sm text-gray-600 mt-1">您的月度投标分析报告已生成，包含投标成功率、竞争对手分析等内容。</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- 底部导航栏 -->
+    <div class="tab-bar h-16 flex items-center justify-around">
+        <a href="home.html" class="flex flex-col items-center">
+            <i class="fas fa-home text-gray-400"></i>
+            <span class="text-xs mt-1 text-gray-400">首页</span>
+        </a>
+        <a href="search.html" class="flex flex-col items-center">
+            <i class="fas fa-search text-gray-400"></i>
+            <span class="text-xs mt-1 text-gray-400">搜索</span>
+        </a>
+        <a href="message.html" class="flex flex-col items-center">
+            <i class="far fa-bell text-blue-500"></i>
+            <span class="text-xs mt-1 text-blue-500">消息</span>
+        </a>
+        <a href="profile.html" class="flex flex-col items-center">
+            <i class="far fa-user text-gray-400"></i>
+            <span class="text-xs mt-1 text-gray-400">我的</span>
+        </a>
+    </div>
+</body>
+</html>
